@@ -48,6 +48,10 @@ _DEFAULT_TARGET_FRAMES = 150
 _SEARCH_SHARE = 0.6
 _DEFAULT_SNAPSHOTS = 8
 
+# Seconds the GIF lingers on the completed frame before looping — the finished
+# multi-agent solution should be readable, not flash for one frame and restart.
+_HOLD_SECONDS = 3
+
 # One CVD-safe hue per agent index (cycled) — identical to the docs site's agent
 # palette, so a GIF and the browser replay read as the same run.
 _AGENT_PALETTE = ("#0d9488", "#c2179b", "#2563eb", "#ca8a04", "#7c3aed", "#e5484d")
@@ -432,18 +436,22 @@ def main() -> None:
     import matplotlib.pyplot as plt
     from matplotlib.animation import FuncAnimation, PillowWriter
 
-    size = (8.0, 8.0)
+    size = (6.0, 6.0)
 
     def new_fig() -> tuple[Any, Axes]:
         fig, ax = plt.subplots(figsize=size)
         return fig, ax
 
     if args.gif:
+        fps = 30
         search_frames = int(_DEFAULT_TARGET_FRAMES * _SEARCH_SHARE)
         exec_frames = max(1, _DEFAULT_TARGET_FRAMES - search_frames)
+        total_frames = search_frames + exec_frames
+        hold_frames = fps * _HOLD_SECONDS
         fig, ax = new_fig()
 
         def update(i: int) -> list[Axes]:
+            i = min(i, total_frames - 1)  # hold phase: the completed frame repeats
             if i < search_frames:
                 draw(ax, scene, (i + 1) / search_frames, None)
             else:
@@ -454,9 +462,9 @@ def main() -> None:
                 draw(ax, scene, 1.0, round(raw) if discrete_step else raw)
             return [ax]
 
-        anim = FuncAnimation(fig, update, frames=search_frames + exec_frames, blit=False)
+        anim = FuncAnimation(fig, update, frames=total_frames + hold_frames, blit=False)
         Path(args.gif).parent.mkdir(parents=True, exist_ok=True)
-        anim.save(args.gif, writer=PillowWriter(fps=30))
+        anim.save(args.gif, writer=PillowWriter(fps=fps))
         plt.close(fig)
         print(f"gif: {args.gif}")
 
