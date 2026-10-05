@@ -25,6 +25,13 @@ lives in the sibling nav_study repo.*
 ![CMake](https://img.shields.io/badge/CMake-%E2%89%A53.20-064F8C.svg)
 ![Tests](https://img.shields.io/badge/tests-200%20py%20%2B%20193%20cpp-brightgreen.svg)
 
+| CBS (2015) | MA-RRT* (2013) | PIBT (2022) | db-CBS (2023) |
+|:---:|:---:|:---:|:---:|
+| ![CBS](.github/assets/cbs-open01_swap.gif) | ![MA-RRT*](.github/assets/ma_rrt_star-maze01_two.gif) | ![PIBT](.github/assets/pibt-open01_cross.gif) | ![db-CBS](.github/assets/db_cbs-corridor01_head_on_timed.gif) |
+
+*네 갈래의 대표 시연 하나씩 — search · sampling · decentralized · kinodynamic. 에이전트마다 고유 색,
+빨간 ✕ 는 선택된 충돌, 점선은 그 제약; 탐색 축적과 실행 재생 모두 시간 순서대로 흐른다.*
+
 </div>
 
 ---
@@ -43,6 +50,14 @@ lives in the sibling nav_study repo.*
 
 알고리즘별 페이지: 개념 유도 + 성질(완전성·최적성·복잡도) 증명 + pseudocode 해설 +
 라이브 sandbox 데모(편집하면 즉시 재계획) + 실제 C++/Python 소스 + **원 논문 레퍼런스(DOI)**.
+
+|  |  |  |
+|---|---|---|
+| [Prioritized A*](https://robotics-study.github.io/mrmp_introduction/algo/prioritized_astar) — Erdmann & Lozano-Pérez 1987 | [Push and Swap](https://robotics-study.github.io/mrmp_introduction/algo/push_and_swap) — Luna & Bekris 2011 | [Push and Rotate](https://robotics-study.github.io/mrmp_introduction/algo/push_and_rotate) — de Wilde et al. 2014 |
+| [Joint-Space A*](https://robotics-study.github.io/mrmp_introduction/algo/joint_astar) — 관행적 baseline | [CBS](https://robotics-study.github.io/mrmp_introduction/algo/cbs) — Sharon et al. 2015 | [RHCR](https://robotics-study.github.io/mrmp_introduction/algo/rhcr) — Li et al. 2021 |
+| [MA-RRT*](https://robotics-study.github.io/mrmp_introduction/algo/ma_rrt_star) — Čáp et al. 2013 | [sRRT](https://robotics-study.github.io/mrmp_introduction/algo/subdimensional_rrt) — Wagner et al. 2012 | [dRRT](https://robotics-study.github.io/mrmp_introduction/algo/drrt) — Solovey et al. 2016 |
+| [dRRT*](https://robotics-study.github.io/mrmp_introduction/algo/drrt_star) — Shome et al. 2020 | [PIBT](https://robotics-study.github.io/mrmp_introduction/algo/pibt) — Okumura et al. 2022 | [winPIBT](https://robotics-study.github.io/mrmp_introduction/algo/winpibt) — Okumura et al. 2020 |
+| [MAPF-POST](https://robotics-study.github.io/mrmp_introduction/algo/mapf_post) — Hönig et al. 2016 | [db-CBS](https://robotics-study.github.io/mrmp_introduction/algo/db_cbs) — Moldagalieva et al. 2023 | |
 
 > 사이트 소스는 `document/` (React + Vite SPA). `main` 에 push 되면 GitHub Actions 가
 > 빌드해 GitHub Pages 로 배포한다 (`.github/workflows/deploy.yml`).
